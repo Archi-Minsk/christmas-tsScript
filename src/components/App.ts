@@ -1,5 +1,4 @@
-import Footer from "./Footer";
-
+import StartPage from "./startPage/StartPage";
 
 class App {
   private rootEl: Element;
@@ -9,17 +8,13 @@ class App {
   }
 
   render() {
-    const div = document.createElement("div");
-    const footer = new Footer();
-    
-    div.innerHTML = `
-         <div>
-            
-         </div>
-       `;
+    const div: Element = document.createElement("div");
+    const startPage = new StartPage();
+
+    div.innerHTML = `<div></div>`;
 
     this.rootEl.appendChild(div);
-    this.rootEl.appendChild(footer.render());
+    this.rootEl.appendChild(startPage.render());
   }
 }
 
