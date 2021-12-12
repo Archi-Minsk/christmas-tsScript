@@ -1,4 +1,4 @@
-import StartPage from "./startPage/StartPage";
+import StartPage from "./StartPage/StartPage";
 
 class App {
   private rootEl: Element;
@@ -8,12 +8,12 @@ class App {
   }
 
   render() {
-    const div: Element = document.createElement("div");
+    // const div: Element = document.createElement("div");
     const startPage = new StartPage();
 
-    div.innerHTML = `<div></div>`;
+    // div.innerHTML = `<div></div>`;
 
-    this.rootEl.appendChild(div);
+    // this.rootEl.appendChild(div);
     this.rootEl.appendChild(startPage.render());
   }
 }

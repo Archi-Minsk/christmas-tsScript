@@ -9,7 +9,17 @@ const baseConfig = {
     module: {
         rules: [
             {
-                test: /\.(png|jpe?g|gif|svg)$/i,
+                test: /\.svg/,
+                use: {
+                  loader: "svg-url-loader",
+                  options: {
+                    // make all svg images to work in IE
+                    iesafe: true,
+                  },
+                },
+              },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
                 use: [
                   {
                     loader: 'file-loader',

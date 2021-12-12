@@ -6,8 +6,10 @@
 }
 .title-text-block {
   position: relative;
+  display: flex;
+  align-items: center;
   width: 25vw;
-  height: 250px;
+  height: 20vh;
   background: radial-gradient(
     118.88% 606.86% at 0% 0%,
     rgba(36, 197, 219, 0.15) 0%,
@@ -21,18 +23,14 @@
 }
 .title-text {
   font-family: "Neucha";
-  width: 20vw;
-  height: 200px;
   position: absolute;
-  font-size: 47px;
-  top: 35%;
-  left: 10%;
+  font-size: 2.5vw;
 }
 .title-btn-start {
   width: 13vw;
-  height: 54px;
+  height: 5vh;
   margin-top: 30px;
-  font-size: 20px;
+  font-size: 1.5vw;
   color: white;
   cursor: pointer;
   border: 1px solid #2a762a;
@@ -44,13 +42,15 @@
   );
   backdrop-filter: blur(31px);
   opacity: 0.8;
-  transition: all 0.7s;
+  transition: all 0.4s;
   z-index: 10;
 }
 .title-btn-start:hover {
   opacity: 1;
   width: 15vw;
-  height: 64px;
+  height: 5.5vh;
+  color: goldenrod;
+  border: 1px solid goldenrod;
 }
 .footer {
   position: absolute;
@@ -63,7 +63,7 @@
 }
 .developer {
   margin: auto 0 auto 20px;
-  font-size: 13px;
+  font-size: 17px;
   cursor: pointer;
   opacity: 0.8;
   transition: all 0.9s;
@@ -72,17 +72,21 @@
   opacity: 1;
 }
 .logo {
-  width: 100px;
-  height: 40px;
-  margin-right: 20px;
+  width: 70px;
+  height: 30px;
+  margin: 10px 20px 0 0;
   cursor: pointer;
   background-image: url("../../assets/rs_school_js\ 1.png");
-  background-size: 100px 40px;
+  background-size: 70px 30px;
   opacity: 0.8;
   transition: all 0.9s;
 }
 .logo:hover {
   opacity: 1;
+}
+.title-page-wrapper-toys {
+  margin-top: 30px;
+  position: relative;
 }
 .title-toys {
   position: absolute;
@@ -93,28 +97,30 @@
 }
 
 .toys-1 {
-  width: 520px;
-  height: 520px;
-  left: 500px;
+  width: 40vw;
+  height: 67vh;
+  top: -100px;
+  right: -50px;
 }
 .toys-1::before {
   content: "";
   position: absolute;
-  border: 1px solid gold;
-  width: 2px;
+  border: 2px solid goldenrod;
+  border-radius: 15px;
   height: 250px;
-  top: -180px;
+  top: -150px;
 }
 .toys-2 {
-  width: 350px;
-  height: 350px;
-  right: 450px;
+  width: 27vw;
+  height: 48vh;
+  top: -130px;
+  left: 100px;
 }
 .toys-2::before {
   content: "";
   position: absolute;
-  border: 1px solid gold;
-  width: 2px;
+  border: 2px solid goldenrod;
+  border-radius: 15px;
   height: 210px;
-  top: -160px;
+  top: -145px;
 }
