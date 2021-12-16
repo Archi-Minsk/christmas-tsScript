@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Neucha";
 }
 
 body {
@@ -10,7 +11,7 @@ body {
   height: 100%;
   color: #fff;
   text-align: center;
-  font-size: 30px;
+  font-family: "Neucha";
   background-image: url("../src/assets/backgraund.jpg");
   background-position: center center;
   background-repeat: no-repeat;
@@ -20,4 +21,8 @@ body {
 a {
   color: #fff;
   text-decoration: none;
+}
+button {
+  color: #fff;
+  cursor: pointer;
 }

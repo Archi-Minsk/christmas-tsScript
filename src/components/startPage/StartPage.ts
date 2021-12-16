@@ -1,5 +1,6 @@
 import "./startPage.css";
-import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
+import ToysPage from "../ToysPage/ToysPage";
 
 class StartPage {
   private element: Element;
@@ -33,12 +34,14 @@ class StartPage {
   startBtn(): void {
     this.btn = this.element.querySelector(".title-btn-start");
     const rootEl = document.querySelector("#root");
-    const footer = new Footer();
+    const header = new Header();
+    const toysPage = new ToysPage();
     if (this.btn) {
       this.btn.addEventListener("click", () => {
         if (rootEl) {
           this.element.remove();
-          rootEl.appendChild(footer.render());
+          rootEl.appendChild(header.render());
+          rootEl.appendChild(toysPage.render());
         }
       });
     }

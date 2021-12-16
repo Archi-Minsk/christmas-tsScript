@@ -1,7 +1,7 @@
-import "./footer.css";
+import "./header.css";
 import StartPage from "../StartPage/StartPage";
 
-class Footer {
+class Header {
   private element: Element;
   private rootEl: Element | null;
   private btnPrev: Element | null;
@@ -17,16 +17,16 @@ class Footer {
   render(): Element {
     this.element = document.createElement("div");
     this.element.innerHTML = `
-       <div class="footer-wrapper">
-         <div class="footer-navi-wrapper">
-           <div class="footer-btn-prev"></div>
-           <h2 class="footer-btn btn-toys">Игрушки</h2>
-           <h2 class="footer-btn btn-tree">Ёлка</h2>
+       <div class="header-wrapper">
+         <div class="header-nav-wrapper">
+           <div class="header-btn-prev"></div>
+           <h2 class="header-btn btn-toys">Игрушки</h2>
+           <h2 class="header-btn btn-tree">Ёлка</h2>
          </div>
-         <div class="footer-search-wrapper">
+         <div class="header-search-wrapper">
            <div class="search-footer">
             <span class="search-svg"></span>
-            <input type="search" class="footer-search" name="toys" placeholder="поиск в чулане">
+            <input type="search" class="header-search" name="toys" placeholder="поиск в чулане">
            </div>
            <div class="number-toys-wrapper">
             <span class="number-toys-top"></span>
@@ -52,4 +52,4 @@ class Footer {
   }
 }
 
-export default Footer;
+export default Header;

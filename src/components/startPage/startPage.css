@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20%;
+  margin-top: 15%;
 }
 .title-text-block {
   position: relative;
@@ -28,7 +28,8 @@
 }
 .title-btn-start {
   width: 13vw;
-  height: 5vh;
+  height: 30px;
+  line-height: 25px;
   margin-top: 30px;
   font-size: 1.5vw;
   color: white;
@@ -57,13 +58,13 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height: 50px;
+  height: 40px;
   background-color: #192f2d;
   bottom: 0px;
 }
 .developer {
   margin: auto 0 auto 20px;
-  font-size: 17px;
+  font-size: 14px;
   cursor: pointer;
   opacity: 0.8;
   transition: all 0.9s;
@@ -72,12 +73,12 @@
   opacity: 1;
 }
 .logo {
-  width: 70px;
-  height: 30px;
+  width: 60px;
+  height: 20px;
   margin: 10px 20px 0 0;
   cursor: pointer;
   background-image: url("../../assets/rs_school_js\ 1.png");
-  background-size: 70px 30px;
+  background-size: 60px 20px;
   opacity: 0.8;
   transition: all 0.9s;
 }
@@ -89,7 +90,7 @@
   position: relative;
 }
 .title-toys {
-  position: absolute;
+  position: fixed;
   background-image: url("../../assets/toys/20.png");
   background-repeat: no-repeat;
   background-size: 100%;
@@ -97,30 +98,30 @@
 }
 
 .toys-1 {
-  width: 40vw;
-  height: 67vh;
-  top: -100px;
-  right: -50px;
+  width: 20vw;
+  height: 57vh;
+  top: 100px;
+  right: 80px;
 }
 .toys-1::before {
   content: "";
   position: absolute;
   border: 2px solid goldenrod;
   border-radius: 15px;
-  height: 250px;
-  top: -150px;
+  height: 450px;
+  top: -415px;
 }
 .toys-2 {
-  width: 27vw;
-  height: 48vh;
-  top: -130px;
-  left: 100px;
+  width: 26vw;
+  height: 65vh;
+  top: 130px;
+  left: 250px;
 }
 .toys-2::before {
   content: "";
   position: absolute;
   border: 2px solid goldenrod;
   border-radius: 15px;
-  height: 210px;
-  top: -145px;
+  height: 410px;
+  top: -355px;
 }

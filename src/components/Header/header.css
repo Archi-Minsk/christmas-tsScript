@@ -1,6 +1,6 @@
-.footer-wrapper {
+.header-wrapper {
   width: 100vw;
-  height: 80px;
+  height: 40px;
   display: flex;
   justify-content: space-between;
   background: radial-gradient(
@@ -10,61 +10,63 @@
   );
   backdrop-filter: blur(31px);
 }
-.footer-navi-wrapper {
+.header-nav-wrapper {
   display: flex;
-  justify-content: space-between;
-  margin: 10px 0 0 20px;
-  width: 350px;
-  font-size: 23px;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  font-size: 14px;
 }
 
-.footer-btn-prev {
-  width: 50px;
-  height: 50px;
+.header-btn-prev {
+  width: 20px;
+  height: 20px;
   background-image: url(../../assets/svg/tree.svg);
   background-size: 100%;
   cursor: pointer;
   opacity: 0.8;
   transition: all 0.7s;
 }
-.footer-btn-prev:hover {
+.header-btn-prev:hover {
   filter: brightness(0) saturate(100%) invert(57%) sepia(80%) saturate(1097%)
     hue-rotate(61deg) brightness(100%) contrast(92%);
   opacity: 1;
 }
-.footer-btn {
-  margin-top: 7px;
+.header-btn {
+  margin: 5px 0 0 10px;
   cursor: pointer;
   opacity: 0.8;
   transition: all 0.7s;
 }
-.footer-btn:hover {
+.header-btn:hover {
   opacity: 1;
+  filter: brightness(0) saturate(100%) invert(57%) sepia(80%) saturate(1097%)
+    hue-rotate(61deg) brightness(100%) contrast(92%);
 }
 
-.footer-search-wrapper {
+.header-search-wrapper {
   display: flex;
   justify-content: space-between;
-  margin: 10px 20px 0 0;
-  width: 450px;
-  font-size: 23px;
+  margin: 10px 10px 0 0;
+  width: 250px;
 }
-.footer-search {
+.header-search {
   position: relative;
-  width: 300px;
-  height: 40px;
-  margin-top: 10px;
-  padding-left: 20px;
-  font-size: 22px;
+  width: 200px;
+  height: 20px;
+  padding: 3px 0 0 20px;
+  font-size: 14px;
   border: none;
+  outline: none;
   border-radius: 15px;
+  opacity: 0.8;
 }
 .search-svg {
   position: absolute;
-  width: 30px;
-  height: 30px;
-  top: 25px;
-  right: 180px;
+  width: 16px;
+  height: 16px;
+  top: 12px;
+  right: 70px;
   background-image: url(../../assets/svg/search.svg);
   filter: brightness(0) saturate(100%);
   background-size: 100%;
@@ -72,19 +74,25 @@
 }
 .number-toys-wrapper {
   position: relative;
+  opacity: 0.8;
+  margin-right: 15px;
 }
 .number-toys-top {
   position: absolute;
-  width: 20px;
-  height: 10px;
-  right: 25px;
-  border: 2px solid #fff;
+  width: 10px;
+  height: 5px;
+  top: -1px;
+  right: 5px;
+  border: 1px solid #fff;
 }
 .number-toys {
-  width: 50px;
-  height: 50px;
-  padding-top: 10px;
-  margin: 9px 10px 0 0;
-  border: 2px solid #fff;
+  width: 20px;
+  height: 20px;
+  margin-top: 3px;
+  border: 1px solid #fff;
   border-radius: 50px;
+  font-size: 10px;
+  line-height: 20px;
+
+  /* line-height: 20px; */
 }
