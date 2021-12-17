@@ -1,5 +1,6 @@
 import "./toysPage.css";
-import UiSlider from "../service/UiSlider";
+import UiSlider from "../service/uiSlider/UiSlider";
+import ToysCard from "../ToysCard/ToysCard";
 
 class ToysPage {
   private element: Element;
@@ -16,7 +17,7 @@ class ToysPage {
                         <div class="filter-forma-wrapper filter-margin">
                           <p class="filter-value">Форма :</p><span class="toys-filter filter-toys-ball"></span><span class="toys-filter filter-toys-bell"></span><span class="toys-filter filter-toys-cone"></span><span class="toys-filter filter-toys-snowflake"></span><span class="toys-filter filter-toys-toy"></span>
                         </div>
-                        <div class="filter-forma-wrapper">
+                        <div class="filter-forma-wrapper filter-color">
                           <p class="filter-value">Цвет :</p><span class="toys-filter filter-color-white"></span><span class="toys-filter filter-color-yellow"></span><span class="toys-filter filter-color-red"></span><span class="toys-filter filter-color-blue"></span><span class="toys-filter filter-color-green"></span>
                         </div>
                         <div class="filter-forma-wrapper">
@@ -63,9 +64,14 @@ class ToysPage {
         `;
     const uiSlider1 = new UiSlider(this.element);
     const uiSlider2 = new UiSlider(this.element);
+    this.addToys();
     uiSlider1.sliderRender1();
     uiSlider2.sliderRender2();
     return this.element;
+  }
+  addToys(): void {
+    const card = new ToysCard(this.element);
+    card.render();
   }
 }
 

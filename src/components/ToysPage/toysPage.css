@@ -248,7 +248,7 @@ input[type="checkbox"]:checked + label:after {
 
 .block-toys-wrapper {
   width: 97vw;
-  height: 64vh;
+  height: 66vh;
   margin: 10px auto;
   background: radial-gradient(
     118.88% 606.86% at 0% 0%,
@@ -264,13 +264,8 @@ input[type="checkbox"]:checked + label:after {
 .security-container-toys {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   width: 94vw;
   height: 60vh;
   overflow-y: auto;
-  border: 1px solid red;
-}
-.card-toys {
-  width: 200px;
-  height: 200px;
-  border: 1px solid red;
 }

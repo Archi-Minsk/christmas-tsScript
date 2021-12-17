@@ -10,11 +10,11 @@ class UiSlider {
     const slider: any = this.element.querySelector("#slider-1");
     if (slider) {
       noUiSlider.create(slider, {
-        start: [0, 100],
+        start: [0, 12],
         connect: true,
         range: {
           min: 0,
-          max: 100,
+          max: 12,
         },
       });
     }
@@ -23,11 +23,11 @@ class UiSlider {
     const slider: any = this.element.querySelector("#slider-2");
     if (slider) {
       noUiSlider.create(slider, {
-        start: [0, 100],
+        start: [1940, 2020],
         connect: true,
         range: {
-          min: 0,
-          max: 100,
+          min: 1940,
+          max: 2020,
         },
       });
     }
