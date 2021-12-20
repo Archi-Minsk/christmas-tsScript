@@ -7,14 +7,25 @@ class ToysCard {
   public element: Element;
   private parent: Element | null;
   private color: Element | null;
+  private form: Element | null;
+  private size: Element | null;
   private filterData: Array<Data> = [];
+  private arrColor: Array<Data> = [];
+  private arrForm: Array<Data> = [];
+  private arrSize: Array<Data> = [];
+  private arrFavorite: Array<Data> = [];
+  private loveToys: Element | null;
   constructor(element: Element) {
     this.card;
     this.element = element;
     this.parent;
     this.filterData;
+    this.arrColor;
+    this.form = this.element.querySelector(".filter-form");
     this.color = this.element.querySelector(".filter-color");
-    this.filterColor();
+    this.size = this.element.querySelector(".filter-size");
+    this.loveToys = this.element.querySelector(".love-toys");
+    this.filterValue();
   }
 
   structureCard(bd: Array<Data>): void {
@@ -31,7 +42,9 @@ class ToysCard {
                     <p class="info-toys">Форма : ${e.shape}</p>
                     <p class="info-toys">Цвет : ${e.color}</p>
                     <p class="info-toys">Размер : ${e.size}</p>
-                    <p class="info-toys">Любимая : ${e.favorite}</p>
+                    <p class="info-toys">Любимая : ${
+                      e.favorite ? "да" : "нет"
+                    }</p>
                 </div>
                 <div class="flag"></div>
             </div>
@@ -52,13 +65,261 @@ class ToysCard {
     }
   }
 
-  removeToys(): void {
-    this.card.remove();
-  }
-  filterColor(): void {
-    this.color?.addEventListener("click", (e) => {
-      console.log(e.target);
+  removeToys = (): void => {
+    const cards = this.element.querySelectorAll(".card-toys-wrapper");
+    cards.forEach((i) => i.remove());
+  };
+
+  methodFilterColor = (
+    btn: Element | null,
+    value: string,
+    trigger: string,
+    search: string
+  ): void => {
+    btn?.addEventListener("click", (e) => {
+      const target = e.target;
+      if (target instanceof Element) {
+        if (target.classList.contains(trigger)) {
+          target.classList.toggle("active");
+          if (target.classList.contains("active")) {
+            if (
+              this.arrForm.length ||
+              this.arrSize.length ||
+              this.arrFavorite.length
+            ) {
+              this.filterData = this.filterData.filter(
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                (i) => i[value] === search
+              );
+            } else {
+              data.forEach((i) => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                if (i[value] === search) {
+                  this.arrColor.push(i);
+                }
+                this.filterData = [
+                  ...this.arrColor,
+                  // ...this.arrForm,
+                  // ...this.arrSize,
+                ];
+              });
+            }
+
+            console.log(this.filterData.length);
+          } else {
+            this.filterData = this.filterData.filter(
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              (i) => i[value] !== search
+            );
+            this.arrColor = this.arrColor.filter(
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              (i) => i[value] !== search
+            );
+            this.filterData = [
+              ...this.arrSize,
+              ...this.arrColor,
+              ...this.arrForm,
+              ...this.arrFavorite,
+            ];
+            console.log(this.filterData.length);
+            console.log(this.arrSize.length);
+            // this.filterData = this.arrColor.length
+            //   ? [...this.arrColor]
+            //   : [...this.arrForm];
+            // console.log(this.arrColor);
+          }
+
+          this.removeToys();
+          this.render();
+        }
+      }
     });
+  };
+
+  methodFilterForm = (
+    btn: Element | null,
+    value: string,
+    trigger: string,
+    search: string
+  ): void => {
+    btn?.addEventListener("click", (e) => {
+      const target = e.target;
+      if (target instanceof Element) {
+        if (target.classList.contains(trigger)) {
+          target.classList.toggle("active");
+          if (target.classList.contains("active")) {
+            if (
+              this.arrColor.length ||
+              this.arrSize.length ||
+              this.arrFavorite.length
+            ) {
+              this.filterData = this.filterData.filter(
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                (i) => i[value] === search
+              );
+            } else {
+              data.forEach((i) => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                if (i[value] === search) {
+                  this.arrForm.push(i);
+                }
+              });
+              this.filterData = [
+                // ...this.arrSize,
+                // ...this.arrColor,
+                ...this.arrForm,
+              ];
+            }
+          } else {
+            // this.filterData = this.filterData.filter(
+            //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //   // @ts-ignore
+            //   (i) => i[value] !== search
+            // );
+
+            this.arrForm = this.arrForm.filter(
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              (i) => i[value] !== search
+            );
+            this.filterData = [
+              ...this.arrSize,
+              ...this.arrColor,
+              ...this.arrForm,
+              ...this.arrFavorite,
+            ];
+            // this.filterData = this.arrForm.length
+            //   ? [...this.arrForm]
+            //   : [...this.arrColor];
+            // console.log(this.arrForm);
+          }
+
+          this.removeToys();
+          this.render();
+        }
+      }
+    });
+  };
+
+  methodFilterSize = (
+    btn: Element | null,
+    value: string,
+    trigger: string,
+    search: string
+  ): void => {
+    btn?.addEventListener("click", (e) => {
+      const target = e.target;
+      if (target instanceof Element) {
+        if (target.classList.contains(trigger)) {
+          target.classList.toggle("active");
+          if (target.classList.contains("active")) {
+            if (
+              this.arrColor.length ||
+              this.arrForm.length ||
+              this.arrFavorite.length
+            ) {
+              console.log(1);
+
+              this.filterData = this.filterData.filter(
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                (i) => i[value] === search
+              );
+            } else {
+              data.forEach((i) => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
+                if (i[value] === search) {
+                  this.arrSize.push(i);
+                }
+              });
+            }
+            this.filterData = [
+              ...this.arrSize,
+              // ...this.arrColor,
+              // ...this.arrForm,
+            ];
+          } else {
+            // this.filterData = this.filterData.filter(
+            //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //   // @ts-ignore
+            //   (i) => i[value] !== search
+            // );
+            this.arrSize = this.arrSize.filter(
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              (i) => i[value] !== search
+            );
+            this.filterData = [
+              ...this.arrSize,
+              ...this.arrColor,
+              ...this.arrForm,
+              ...this.arrFavorite,
+            ];
+          }
+          this.removeToys();
+          this.render();
+        }
+      }
+    });
+  };
+
+  love(): void {
+    this.loveToys?.addEventListener("click", () => {
+      this.loveToys?.classList.toggle("active-love");
+      if (this.loveToys?.classList.contains("active-love")) {
+        if (
+          this.arrForm.length ||
+          this.arrSize.length ||
+          this.arrColor.length
+        ) {
+          this.filterData = this.filterData.filter((i) => i.favorite === true);
+          console.log(this.filterData);
+        } else {
+          this.arrFavorite = data.filter((i) => i.favorite === true);
+          console.log(this.arrFavorite);
+          this.filterData.push(...this.arrFavorite);
+          console.log(this.filterData.length);
+        }
+      } else {
+        this.arrFavorite = this.arrFavorite.filter((i) => i.favorite !== true);
+
+        this.filterData = [
+          ...this.arrSize,
+          ...this.arrColor,
+          ...this.arrForm,
+          ...this.arrFavorite,
+        ];
+      }
+      this.removeToys();
+      this.render();
+    });
+  }
+
+  filterValue(): void {
+    this.methodFilterColor(this.color, "color", "white", "белый");
+    this.methodFilterColor(this.color, "color", "yellow", "желтый");
+    this.methodFilterColor(this.color, "color", "red", "красный");
+    this.methodFilterColor(this.color, "color", "blue", "синий");
+    this.methodFilterColor(this.color, "color", "green", "зелёный");
+
+    this.methodFilterForm(this.form, "shape", "ball", "шар");
+    this.methodFilterForm(this.form, "shape", "bell", "колокольчик");
+    this.methodFilterForm(this.form, "shape", "cone", "шишка");
+    this.methodFilterForm(this.form, "shape", "snowflake", "снежинка");
+    this.methodFilterForm(this.form, "shape", "toy", "фигурка");
+
+    this.methodFilterSize(this.size, "size", "small", "малый");
+    this.methodFilterSize(this.size, "size", "medium", "средний");
+    this.methodFilterSize(this.size, "size", "big", "большой");
+
+    this.love();
   }
 }
 

@@ -7,6 +7,7 @@ interface Data {
   color: string;
   size: string;
   favorite: boolean;
+  // [key: string]: string | boolean;
 }
 
 export { Data };

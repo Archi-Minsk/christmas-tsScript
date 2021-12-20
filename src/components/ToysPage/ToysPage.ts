@@ -14,14 +14,14 @@ class ToysPage {
                 <div class="toys-filter-wrapper">
                     <div class="filter-style filter-value-wrapper">
                         <h2 class="filter-title-block">Фильтры по значению</h2><br>
-                        <div class="filter-forma-wrapper filter-margin">
-                          <p class="filter-value">Форма :</p><span class="toys-filter filter-toys-ball"></span><span class="toys-filter filter-toys-bell"></span><span class="toys-filter filter-toys-cone"></span><span class="toys-filter filter-toys-snowflake"></span><span class="toys-filter filter-toys-toy"></span>
+                        <div class="filter-forma-wrapper filter-margin filter-form">
+                          <p class="filter-value">Форма :</p><span class="ball toys-filter filter-toys-ball"></span><span class="bell toys-filter filter-toys-bell"></span><span class="cone toys-filter filter-toys-cone"></span><span class="snowflake toys-filter filter-toys-snowflake"></span><span class="toy toys-filter filter-toys-toy"></span>
                         </div>
                         <div class="filter-forma-wrapper filter-color">
-                          <p class="filter-value">Цвет :</p><span class="toys-filter filter-color-white"></span><span class="toys-filter filter-color-yellow"></span><span class="toys-filter filter-color-red"></span><span class="toys-filter filter-color-blue"></span><span class="toys-filter filter-color-green"></span>
+                          <p class="filter-value">Цвет :</p><span class="white toys-filter filter-color-white"></span><span class="yellow toys-filter filter-color-yellow"></span><span class="red toys-filter filter-color-red"></span><span class="blue toys-filter filter-color-blue"></span><span class="green toys-filter filter-color-green"></span>
                         </div>
-                        <div class="filter-forma-wrapper">
-                          <p class="filter-value">Размер :</p><span class="toys-filter filter-size-small"></span><span class="toys-filter filter-size-medium"></span><span class="toys-filter filter-size-big"></span>
+                        <div class="filter-forma-wrapper filter-size">
+                          <p class="filter-value">Размер :</p><span class="small toys-filter filter-size-small"></span><span class="medium toys-filter filter-size-medium"></span><span class="big toys-filter filter-size-big"></span>
                         </div>
                         <div class="filter-forma-wrapper">
                           <p class="filter-value">Только любимые :</p>
