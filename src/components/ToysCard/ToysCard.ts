@@ -1,6 +1,7 @@
 import "./toysCard.css";
 import { Data } from "../service/interface/interface";
 import { data } from "../../db/data";
+import UiSlider from "../service/uiSlider/UiSlider";
 
 class ToysCard {
   private card: Element;
@@ -21,10 +22,14 @@ class ToysCard {
     this.parent;
     this.filterData;
     this.arrColor;
+    this.arrForm;
+    this.arrSize;
+    this.arrFavorite;
     this.form = this.element.querySelector(".filter-form");
     this.color = this.element.querySelector(".filter-color");
     this.size = this.element.querySelector(".filter-size");
     this.loveToys = this.element.querySelector(".love-toys");
+
     this.filterValue();
   }
 
@@ -301,6 +306,125 @@ class ToysCard {
       this.render();
     });
   }
+  filterSort() {
+    const select = this.element.querySelector(`select`);
+    select?.addEventListener("change", () => {
+      if (select.value === "sort-name-max") {
+        if (this.filterData.length) {
+          this.filterData.sort((a, b) => {
+            if (a.name < b.name) {
+              return -1;
+            }
+            if (a.name > b.name) {
+              return 1;
+            }
+            return 0;
+          });
+        } else {
+          data.sort((a, b) => {
+            if (a.name < b.name) {
+              return -1;
+            }
+            if (a.name > b.name) {
+              return 1;
+            }
+            return 0;
+          });
+        }
+      } else if (select.value === "sort-name-min") {
+        if (this.filterData.length) {
+          this.filterData.sort((a, b) => {
+            if (a.name > b.name) {
+              return -1;
+            }
+            if (a.name < b.name) {
+              return 1;
+            }
+            return 0;
+          });
+        } else {
+          data.sort((a, b) => {
+            if (a.name > b.name) {
+              return -1;
+            }
+            if (a.name < b.name) {
+              return 1;
+            }
+            return 0;
+          });
+        }
+      } else if (select.value === "sort-count-max") {
+        if (this.filterData.length) {
+          this.filterData.sort((a, b) => {
+            if (+a.count < +b.count) {
+              return -1;
+            }
+            if (+a.count > +b.count) {
+              return 1;
+            }
+            return 0;
+          });
+        } else {
+          data.sort((a, b) => {
+            if (+a.count < +b.count) {
+              return -1;
+            }
+            if (+a.count > +b.count) {
+              return 1;
+            }
+            return 0;
+          });
+        }
+      } else {
+        if (this.filterData.length) {
+          this.filterData.sort((a, b) => {
+            if (+a.count > +b.count) {
+              return -1;
+            }
+            if (+a.count < +b.count) {
+              return 1;
+            }
+            return 0;
+          });
+        } else {
+          data.sort((a, b) => {
+            if (+a.count > +b.count) {
+              return -1;
+            }
+            if (+a.count < +b.count) {
+              return 1;
+            }
+            return 0;
+          });
+        }
+      }
+      this.removeToys();
+      this.render();
+    });
+  }
+
+  btnReset() {
+    const btn = this.element.querySelector(".btn-reset");
+
+    if (btn) {
+      btn.addEventListener("click", () => {
+        this.arrSize = [];
+        this.arrColor = [];
+        this.arrForm = [];
+        this.arrFavorite = [];
+        this.filterData = [];
+        const block = this.element.querySelectorAll("span");
+        block.forEach((i) => {
+          if (i.classList.contains("active")) {
+            i.classList.toggle("active");
+          }
+        });
+
+        this.removeToys();
+        this.render();
+      });
+    }
+  }
 
   filterValue(): void {
     this.methodFilterColor(this.color, "color", "white", "белый");
@@ -320,6 +444,8 @@ class ToysCard {
     this.methodFilterSize(this.size, "size", "big", "большой");
 
     this.love();
+    this.filterSort();
+    this.btnReset();
   }
 }
 

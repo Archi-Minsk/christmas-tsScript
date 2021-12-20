@@ -4,8 +4,18 @@ import ToysCard from "../ToysCard/ToysCard";
 
 class ToysPage {
   private element: Element;
+  public count: [number, number];
+  public uiSlider1: UiSlider;
+  public uiSlider2: UiSlider;
+  public valueLeft: Element | null;
+  public valueRight: Element | null;
   constructor() {
     this.element;
+    this.count;
+    this.uiSlider1;
+    this.uiSlider2;
+    this.valueLeft;
+    this.valueRight;
   }
   render(): Element {
     this.element = document.createElement("div");
@@ -32,9 +42,9 @@ class ToysPage {
                         <h2 class="filter-title-block">Фильтры по диапазону</h2>
                         <p class="filter-value">Количечтво игрушек :</p>
                         <div class="uiSlider-wrapper">
-                          <div class="slider-value">0</div>
+                          <div class="slider-value value-left"></div>
                           <div class="uiSlider1" id="slider-1"></div>
-                          <div class="slider-value">12</div>
+                          <div class="slider-value value-right"></div>
                         </div>
                         
                         <p class="filter-value">Год приобретения :</p>
@@ -62,13 +72,38 @@ class ToysPage {
                 </div>
             </div>
         `;
-    const uiSlider1 = new UiSlider(this.element);
-    const uiSlider2 = new UiSlider(this.element);
+
+    this.uiSlider1 = new UiSlider(this.element);
+    this.uiSlider2 = new UiSlider(this.element);
     this.addToys();
-    uiSlider1.sliderRender1();
-    uiSlider2.sliderRender2();
+    this.uiSlider1.sliderRender1();
+    this.uiSlider2.sliderRender2();
+    this.renderValueSlider();
     return this.element;
   }
+  renderValueSlider() {
+    this.uiSlider1.slider1.noUiSlider.on("update.one", () => {
+      this.removeValue();
+      const count = this.uiSlider1.slider1.noUiSlider.get();
+      const left = Math.floor(count[0]);
+      const right = Math.floor(count[1]);
+
+      this.valueLeft = document.createElement("div");
+      this.valueRight = document.createElement("div");
+      this.valueLeft.innerHTML = `${left}`;
+      this.valueRight.innerHTML = `${right}`;
+      const parentLeft = this.element.querySelector(".value-left");
+      const parentRight = this.element.querySelector(".value-right");
+      parentLeft?.appendChild(this.valueLeft);
+      parentRight?.appendChild(this.valueRight);
+    });
+  }
+
+  removeValue() {
+    this.valueLeft?.remove();
+    this.valueRight?.remove();
+  }
+
   addToys(): void {
     const card = new ToysCard(this.element);
     card.render();
