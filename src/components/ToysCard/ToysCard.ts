@@ -29,7 +29,6 @@ class ToysCard {
     this.color = this.element.querySelector(".filter-color");
     this.size = this.element.querySelector(".filter-size");
     this.loveToys = this.element.querySelector(".love-toys");
-
     this.filterValue();
   }
 
@@ -77,7 +76,6 @@ class ToysCard {
 
   methodFilterColor = (
     btn: Element | null,
-    value: string,
     trigger: string,
     search: string
   ): void => {
@@ -93,49 +91,25 @@ class ToysCard {
               this.arrFavorite.length
             ) {
               this.filterData = this.filterData.filter(
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                (i) => i[value] === search
+                (i) => i.color === search
               );
             } else {
               data.forEach((i) => {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                if (i[value] === search) {
+                if (i.color === search) {
                   this.arrColor.push(i);
                 }
-                this.filterData = [
-                  ...this.arrColor,
-                  // ...this.arrForm,
-                  // ...this.arrSize,
-                ];
+                this.filterData = [...this.arrColor];
               });
             }
-
-            console.log(this.filterData.length);
           } else {
-            this.filterData = this.filterData.filter(
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              (i) => i[value] !== search
-            );
-            this.arrColor = this.arrColor.filter(
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              (i) => i[value] !== search
-            );
+            this.filterData = this.filterData.filter((i) => i.color !== search);
+            this.arrColor = this.arrColor.filter((i) => i.color !== search);
             this.filterData = [
               ...this.arrSize,
               ...this.arrColor,
               ...this.arrForm,
               ...this.arrFavorite,
             ];
-            console.log(this.filterData.length);
-            console.log(this.arrSize.length);
-            // this.filterData = this.arrColor.length
-            //   ? [...this.arrColor]
-            //   : [...this.arrForm];
-            // console.log(this.arrColor);
           }
 
           this.removeToys();
@@ -147,7 +121,6 @@ class ToysCard {
 
   methodFilterForm = (
     btn: Element | null,
-    value: string,
     trigger: string,
     search: string
   ): void => {
@@ -163,46 +136,24 @@ class ToysCard {
               this.arrFavorite.length
             ) {
               this.filterData = this.filterData.filter(
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                (i) => i[value] === search
+                (i) => i.shape === search
               );
             } else {
               data.forEach((i) => {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                if (i[value] === search) {
+                if (i.shape === search) {
                   this.arrForm.push(i);
                 }
               });
-              this.filterData = [
-                // ...this.arrSize,
-                // ...this.arrColor,
-                ...this.arrForm,
-              ];
+              this.filterData = [...this.arrForm];
             }
           } else {
-            // this.filterData = this.filterData.filter(
-            //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            //   // @ts-ignore
-            //   (i) => i[value] !== search
-            // );
-
-            this.arrForm = this.arrForm.filter(
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              (i) => i[value] !== search
-            );
+            this.arrForm = this.arrForm.filter((i) => i.shape !== search);
             this.filterData = [
               ...this.arrSize,
               ...this.arrColor,
               ...this.arrForm,
               ...this.arrFavorite,
             ];
-            // this.filterData = this.arrForm.length
-            //   ? [...this.arrForm]
-            //   : [...this.arrColor];
-            // console.log(this.arrForm);
           }
 
           this.removeToys();
@@ -214,7 +165,6 @@ class ToysCard {
 
   methodFilterSize = (
     btn: Element | null,
-    value: string,
     trigger: string,
     search: string
   ): void => {
@@ -230,35 +180,18 @@ class ToysCard {
               this.arrFavorite.length
             ) {
               this.filterData = this.filterData.filter(
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                (i) => i[value] === search
+                (i) => i.size === search
               );
             } else {
               data.forEach((i) => {
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
-                if (i[value] === search) {
+                if (i.size === search) {
                   this.arrSize.push(i);
                 }
               });
             }
-            this.filterData = [
-              ...this.arrSize,
-              // ...this.arrColor,
-              // ...this.arrForm,
-            ];
+            this.filterData = [...this.arrSize];
           } else {
-            // this.filterData = this.filterData.filter(
-            //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            //   // @ts-ignore
-            //   (i) => i[value] !== search
-            // );
-            this.arrSize = this.arrSize.filter(
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
-              (i) => i[value] !== search
-            );
+            this.arrSize = this.arrSize.filter((i) => i.size !== search);
             this.filterData = [
               ...this.arrSize,
               ...this.arrColor,
@@ -407,9 +340,7 @@ class ToysCard {
         this.arrForm = [];
         this.arrFavorite = [];
         this.filterData = [];
-        // if (this.loveToys?.checked) {
-        //   this.loveToys?.checked = false
-        // }
+        // this.loveToys?.checked = false
 
         const block = this.element.querySelectorAll("span");
         block.forEach((i) => {
@@ -439,21 +370,21 @@ class ToysCard {
   }
 
   filterValue(): void {
-    this.methodFilterColor(this.color, "color", "white", "белый");
-    this.methodFilterColor(this.color, "color", "yellow", "желтый");
-    this.methodFilterColor(this.color, "color", "red", "красный");
-    this.methodFilterColor(this.color, "color", "blue", "синий");
-    this.methodFilterColor(this.color, "color", "green", "зелёный");
+    this.methodFilterColor(this.color, "white", "белый");
+    this.methodFilterColor(this.color, "yellow", "желтый");
+    this.methodFilterColor(this.color, "red", "красный");
+    this.methodFilterColor(this.color, "blue", "синий");
+    this.methodFilterColor(this.color, "green", "зелёный");
 
-    this.methodFilterForm(this.form, "shape", "ball", "шар");
-    this.methodFilterForm(this.form, "shape", "bell", "колокольчик");
-    this.methodFilterForm(this.form, "shape", "cone", "шишка");
-    this.methodFilterForm(this.form, "shape", "snowflake", "снежинка");
-    this.methodFilterForm(this.form, "shape", "toy", "фигурка");
+    this.methodFilterForm(this.form, "ball", "шар");
+    this.methodFilterForm(this.form, "bell", "колокольчик");
+    this.methodFilterForm(this.form, "cone", "шишка");
+    this.methodFilterForm(this.form, "snowflake", "снежинка");
+    this.methodFilterForm(this.form, "toy", "фигурка");
 
-    this.methodFilterSize(this.size, "size", "small", "малый");
-    this.methodFilterSize(this.size, "size", "medium", "средний");
-    this.methodFilterSize(this.size, "size", "big", "большой");
+    this.methodFilterSize(this.size, "small", "малый");
+    this.methodFilterSize(this.size, "medium", "средний");
+    this.methodFilterSize(this.size, "big", "большой");
 
     this.love();
     this.filterSort();
