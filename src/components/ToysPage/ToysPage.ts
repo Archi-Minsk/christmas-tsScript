@@ -9,6 +9,8 @@ class ToysPage {
   public uiSlider2: UiSlider;
   public valueLeft: Element | null;
   public valueRight: Element | null;
+  public valueLeftYear: Element | null;
+  public valueRightYear: Element | null;
   constructor() {
     this.element;
     this.count;
@@ -16,6 +18,8 @@ class ToysPage {
     this.uiSlider2;
     this.valueLeft;
     this.valueRight;
+    this.valueLeftYear;
+    this.valueRightYear;
   }
   render(): Element {
     this.element = document.createElement("div");
@@ -49,9 +53,9 @@ class ToysPage {
                         
                         <p class="filter-value">Год приобретения :</p>
                         <div class="uiSlider-wrapper">
-                          <div class="slider-value">1940</div>
+                          <div class="slider-value value-left-year"></div>
                           <div class="uiSlider2" id="slider-2"></div>
-                          <div class="slider-value">2020</div>
+                          <div class="slider-value value-right-year"></div>
                         </div>
                     </div>
                     <div class="filter-style filter-sort-wrapper">
@@ -62,7 +66,7 @@ class ToysPage {
                           <option value="sort-count-max">По количеству по возрастанию</option>
                           <option value="sort-count-min">По количеству по убыванию</option>
                         </select>
-                        <button class="btn-reset">Сброс фильтров</button>
+                        <button class="btn-reset button-res">Сброс фильтров</button>
                     </div>
                 </div>
                 <div class="block-toys-wrapper">
@@ -79,12 +83,14 @@ class ToysPage {
     this.uiSlider1.sliderRender1();
     this.uiSlider2.sliderRender2();
     this.renderValueSlider();
+    this.renderValueYear();
+    this.btnReset();
     return this.element;
   }
   renderValueSlider() {
     this.uiSlider1.slider1.noUiSlider.on("update.one", () => {
-      this.removeValue();
       const count = this.uiSlider1.slider1.noUiSlider.get();
+      this.removeValue();
       const left = Math.floor(count[0]);
       const right = Math.floor(count[1]);
 
@@ -98,10 +104,41 @@ class ToysPage {
       parentRight?.appendChild(this.valueRight);
     });
   }
+  renderValueYear() {
+    this.uiSlider2.slider.noUiSlider.on("update.one", () => {
+      const count = this.uiSlider2.slider.noUiSlider.get();
+      this.removeValueYears();
+
+      const left = Math.floor(count[0]);
+      const right = Math.floor(count[1]);
+
+      this.valueLeftYear = document.createElement("div");
+      this.valueRightYear = document.createElement("div");
+      this.valueLeftYear.innerHTML = `${left}`;
+      this.valueRightYear.innerHTML = `${right}`;
+
+      const parentLeft = this.element.querySelector(".value-left-year");
+      const parentRight = this.element.querySelector(".value-right-year");
+
+      parentLeft?.appendChild(this.valueLeftYear);
+      parentRight?.appendChild(this.valueRightYear);
+    });
+  }
 
   removeValue() {
     this.valueLeft?.remove();
     this.valueRight?.remove();
+  }
+  removeValueYears() {
+    this.valueLeftYear?.remove();
+    this.valueRightYear?.remove();
+  }
+  btnReset() {
+    const btn = this.element.querySelector(".button-res");
+    btn?.addEventListener("click", () => {
+      this.uiSlider1.slider1.noUiSlider.reset();
+      this.uiSlider2.slider.noUiSlider.reset();
+    });
   }
 
   addToys(): void {

@@ -46,6 +46,10 @@
   border-width: 40px 20px 10px;
   border-style: solid;
   border-color: #278d9f #278d9f transparent;
+  transition: all 0.3;
+}
+.flag-active {
+  border-color: rgb(165, 129, 36) rgb(165, 129, 36) transparent;
 }
 .active {
   opacity: 1;

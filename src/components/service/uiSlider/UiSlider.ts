@@ -4,6 +4,7 @@ import noUiSlider from "nouislider";
 class UiSlider {
   public element: Element;
   public slider1: any;
+  public slider: any;
 
   constructor(element: Element) {
     this.element = element;
@@ -24,9 +25,9 @@ class UiSlider {
     }
   }
   sliderRender2(): void {
-    const slider: any = this.element.querySelector("#slider-2");
-    if (slider) {
-      noUiSlider.create(slider, {
+    this.slider = this.element.querySelector("#slider-2");
+    if (this.slider) {
+      noUiSlider.create(this.slider, {
         start: [1940, 2020],
         connect: true,
         step: 10,

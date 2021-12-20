@@ -1,7 +1,6 @@
 import "./toysCard.css";
 import { Data } from "../service/interface/interface";
 import { data } from "../../db/data";
-import UiSlider from "../service/uiSlider/UiSlider";
 
 class ToysCard {
   private card: Element;
@@ -15,7 +14,8 @@ class ToysCard {
   private arrForm: Array<Data> = [];
   private arrSize: Array<Data> = [];
   private arrFavorite: Array<Data> = [];
-  private loveToys: Element | null;
+  private loveToys: HTMLInputElement | null;
+
   constructor(element: Element) {
     this.card;
     this.element = element;
@@ -51,7 +51,7 @@ class ToysCard {
                       e.favorite ? "да" : "нет"
                     }</p>
                 </div>
-                <div class="flag"></div>
+                <div class="flag ${e.num}"></div>
             </div>
         `;
       if (this.parent) {
@@ -229,8 +229,6 @@ class ToysCard {
               this.arrForm.length ||
               this.arrFavorite.length
             ) {
-              console.log(1);
-
               this.filterData = this.filterData.filter(
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
@@ -277,20 +275,16 @@ class ToysCard {
 
   love(): void {
     this.loveToys?.addEventListener("click", () => {
-      this.loveToys?.classList.toggle("active-love");
-      if (this.loveToys?.classList.contains("active-love")) {
+      if (this.loveToys?.checked) {
         if (
           this.arrForm.length ||
           this.arrSize.length ||
           this.arrColor.length
         ) {
           this.filterData = this.filterData.filter((i) => i.favorite === true);
-          console.log(this.filterData);
         } else {
           this.arrFavorite = data.filter((i) => i.favorite === true);
-          console.log(this.arrFavorite);
           this.filterData.push(...this.arrFavorite);
-          console.log(this.filterData.length);
         }
       } else {
         this.arrFavorite = this.arrFavorite.filter((i) => i.favorite !== true);
@@ -306,7 +300,7 @@ class ToysCard {
       this.render();
     });
   }
-  filterSort() {
+  filterSort(): void {
     const select = this.element.querySelector(`select`);
     select?.addEventListener("change", () => {
       if (select.value === "sort-name-max") {
@@ -403,7 +397,7 @@ class ToysCard {
     });
   }
 
-  btnReset() {
+  btnReset(): void {
     const btn = this.element.querySelector(".btn-reset");
 
     if (btn) {
@@ -413,6 +407,10 @@ class ToysCard {
         this.arrForm = [];
         this.arrFavorite = [];
         this.filterData = [];
+        // if (this.loveToys?.checked) {
+        //   this.loveToys?.checked = false
+        // }
+
         const block = this.element.querySelectorAll("span");
         block.forEach((i) => {
           if (i.classList.contains("active")) {
@@ -424,6 +422,20 @@ class ToysCard {
         this.render();
       });
     }
+  }
+
+  filterFlag(): void {
+    const containerCard = this.element.querySelector(
+      ".security-container-toys"
+    );
+    containerCard?.addEventListener("click", (e) => {
+      const target = e.target;
+      if (target instanceof Element) {
+        if (target.classList.contains("flag")) {
+          target.classList.toggle("flag-active");
+        }
+      }
+    });
   }
 
   filterValue(): void {
@@ -446,6 +458,7 @@ class ToysCard {
     this.love();
     this.filterSort();
     this.btnReset();
+    this.filterFlag();
   }
 }
 
