@@ -15,6 +15,7 @@ class ToysCard {
   private arrSize: Array<Data> = [];
   private arrFavorite: Array<Data> = [];
   private loveToys: HTMLInputElement | null;
+  private search: any;
 
   constructor(element: Element) {
     this.card;
@@ -29,6 +30,7 @@ class ToysCard {
     this.color = this.element.querySelector(".filter-color");
     this.size = this.element.querySelector(".filter-size");
     this.loveToys = this.element.querySelector(".love-toys");
+    this.search;
     this.filterValue();
   }
 
@@ -340,8 +342,8 @@ class ToysCard {
         this.arrForm = [];
         this.arrFavorite = [];
         this.filterData = [];
-        // this.loveToys?.checked = false
-
+        // this.loveToys?.checked = false;
+        this.search.value = "";
         const block = this.element.querySelectorAll("span");
         block.forEach((i) => {
           if (i.classList.contains("active")) {
@@ -369,6 +371,28 @@ class ToysCard {
     });
   }
 
+  searchFilter() {
+    this.search = document.querySelector(".header-search");
+
+    this.search?.addEventListener("input", () => {
+      const dataSearch: Data[] = [];
+      this.filterData = [];
+      if (this.search) {
+        const value = this.search.value.trim().toLowerCase();
+
+        data.forEach((i) => {
+          if (i.name.toLowerCase().includes(value)) {
+            dataSearch.push(i);
+          }
+        });
+        this.filterData = [...dataSearch];
+
+        this.removeToys();
+        this.render();
+      }
+    });
+  }
+
   filterValue(): void {
     this.methodFilterColor(this.color, "white", "белый");
     this.methodFilterColor(this.color, "yellow", "желтый");
@@ -386,6 +410,7 @@ class ToysCard {
     this.methodFilterSize(this.size, "medium", "средний");
     this.methodFilterSize(this.size, "big", "большой");
 
+    this.searchFilter();
     this.love();
     this.filterSort();
     this.btnReset();
