@@ -7,10 +7,13 @@ class ToysPage {
   public count: [number, number];
   public uiSlider1: UiSlider;
   public uiSlider2: UiSlider;
-  public valueLeft: Element | null;
+  public valueLeft: Element;
   public valueRight: Element | null;
   public valueLeftYear: Element | null;
   public valueRightYear: Element | null;
+  public left: number;
+  public right: number;
+
   constructor() {
     this.element;
     this.count;
@@ -79,32 +82,41 @@ class ToysPage {
 
     this.uiSlider1 = new UiSlider(this.element);
     this.uiSlider2 = new UiSlider(this.element);
-    this.addToys();
+
     this.uiSlider1.sliderRender1();
     this.uiSlider2.sliderRender2();
     this.renderValueSlider();
     this.renderValueYear();
+    this.addToys();
     this.btnReset();
     return this.element;
   }
-  renderValueSlider() {
+  renderValueSlider(): void {
     this.uiSlider1.slider1.noUiSlider.on("update.one", () => {
       const count = this.uiSlider1.slider1.noUiSlider.get();
       this.removeValue();
-      const left = Math.floor(count[0]);
-      const right = Math.floor(count[1]);
+      this.left = Math.floor(count[0]);
+      this.right = Math.floor(count[1]);
 
       this.valueLeft = document.createElement("div");
+      this.valueLeft.classList.add("value-count-left");
+
       this.valueRight = document.createElement("div");
-      this.valueLeft.innerHTML = `${left}`;
-      this.valueRight.innerHTML = `${right}`;
+      this.valueRight.classList.add("value-count-right");
+
+      this.valueLeft.innerHTML = `${this.left}`;
+      this.valueRight.innerHTML = `${this.right}`;
       const parentLeft = this.element.querySelector(".value-left");
       const parentRight = this.element.querySelector(".value-right");
       parentLeft?.appendChild(this.valueLeft);
       parentRight?.appendChild(this.valueRight);
+
+      const sliderCount = new ToysCard(this.element);
+      sliderCount.filterSliderCount();
     });
   }
-  renderValueYear() {
+
+  renderValueYear(): void {
     this.uiSlider2.slider.noUiSlider.on("update.one", () => {
       const count = this.uiSlider2.slider.noUiSlider.get();
       this.removeValueYears();
@@ -113,7 +125,11 @@ class ToysPage {
       const right = Math.floor(count[1]);
 
       this.valueLeftYear = document.createElement("div");
+      this.valueLeftYear.classList.add("year-left");
+
       this.valueRightYear = document.createElement("div");
+      this.valueRightYear.classList.add("year-right");
+
       this.valueLeftYear.innerHTML = `${left}`;
       this.valueRightYear.innerHTML = `${right}`;
 
@@ -122,18 +138,20 @@ class ToysPage {
 
       parentLeft?.appendChild(this.valueLeftYear);
       parentRight?.appendChild(this.valueRightYear);
+      const sliderYear = new ToysCard(this.element);
+      sliderYear.filterSliderYear();
     });
   }
 
-  removeValue() {
+  removeValue(): void {
     this.valueLeft?.remove();
     this.valueRight?.remove();
   }
-  removeValueYears() {
+  removeValueYears(): void {
     this.valueLeftYear?.remove();
     this.valueRightYear?.remove();
   }
-  btnReset() {
+  btnReset(): void {
     const btn = this.element.querySelector(".button-res");
     btn?.addEventListener("click", () => {
       this.uiSlider1.slider1.noUiSlider.reset();

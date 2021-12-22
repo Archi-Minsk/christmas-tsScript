@@ -16,6 +16,10 @@ class ToysCard {
   private arrFavorite: Array<Data> = [];
   private loveToys: HTMLInputElement | null;
   private search: any;
+  private valueLeft: Element | null;
+  private valueRight: Element | null;
+  private valueLeftYear: Element | null;
+  private valueRightYear: Element | null;
 
   constructor(element: Element) {
     this.card;
@@ -31,6 +35,10 @@ class ToysCard {
     this.size = this.element.querySelector(".filter-size");
     this.loveToys = this.element.querySelector(".love-toys");
     this.search;
+    this.valueLeft = this.element.querySelector(".value-count-left");
+    this.valueRight = this.element.querySelector(".value-count-right");
+    this.valueLeftYear = this.element.querySelector(".year-left");
+    this.valueRightYear = this.element.querySelector(".year-right");
     this.filterValue();
   }
 
@@ -393,6 +401,50 @@ class ToysCard {
     });
   }
 
+  filterSliderCount() {
+    const countLeft: any = this.valueLeft?.innerHTML;
+    const countRight: any = this.valueRight?.innerHTML;
+    const arr: Data[] = [];
+    if (countLeft >= 0) {
+      if (this.filterData.length) {
+        this.filterData = this.filterData.filter(
+          (i) => +i.count >= +countLeft && +i.count <= +countRight
+        );
+      } else {
+        data.forEach((i) => {
+          if (+i.count >= +countLeft && +i.count <= +countRight) {
+            arr.push(i);
+          }
+          this.filterData = [...arr];
+        });
+      }
+    }
+    this.removeToys();
+    this.render();
+  }
+  filterSliderYear() {
+    const countLeft: any = this.valueLeftYear?.innerHTML;
+    const countRight: any = this.valueRightYear?.innerHTML;
+
+    const arr: Data[] = [];
+    if (countLeft >= 0) {
+      if (this.filterData.length) {
+        this.filterData = this.filterData.filter(
+          (i) => +i.year >= +countLeft && +i.year <= +countRight
+        );
+      } else {
+        data.forEach((i) => {
+          if (+i.year >= +countLeft && +i.year <= +countRight) {
+            arr.push(i);
+          }
+          this.filterData = [...arr];
+        });
+      }
+    }
+    this.removeToys();
+    this.render();
+  }
+
   filterValue(): void {
     this.methodFilterColor(this.color, "white", "белый");
     this.methodFilterColor(this.color, "yellow", "желтый");
@@ -415,6 +467,7 @@ class ToysCard {
     this.filterSort();
     this.btnReset();
     this.filterFlag();
+    // this.filterSliderCount();
   }
 }
 
