@@ -6,6 +6,7 @@ class ToysCard {
   private card: Element;
   public element: Element;
   private parent: Element | null;
+  private parentModal: Element | null;
   private color: Element | null;
   private form: Element | null;
   private size: Element | null;
@@ -20,11 +21,14 @@ class ToysCard {
   private valueRight: Element | null;
   private valueLeftYear: Element | null;
   private valueRightYear: Element | null;
+  public container: Data[];
+  private countToys: Element;
 
   constructor(element: Element) {
     this.card;
     this.element = element;
     this.parent;
+    this.parentModal;
     this.filterData;
     this.arrColor;
     this.arrForm;
@@ -39,6 +43,9 @@ class ToysCard {
     this.valueRight = this.element.querySelector(".value-count-right");
     this.valueLeftYear = this.element.querySelector(".year-left");
     this.valueRightYear = this.element.querySelector(".year-right");
+    this.container = [];
+    this.countToys;
+
     this.filterValue();
   }
 
@@ -60,7 +67,7 @@ class ToysCard {
                       e.favorite ? "да" : "нет"
                     }</p>
                 </div>
-                <div class="flag ${e.num}"></div>
+                <div data-flag = "${e.num}" class="flag "></div>
             </div>
         `;
       if (this.parent) {
@@ -369,12 +376,50 @@ class ToysCard {
     const containerCard = this.element.querySelector(
       ".security-container-toys"
     );
+
+    const count: any = document.querySelector(".number-toys");
+
     containerCard?.addEventListener("click", (e) => {
+      count.innerHTML = "0";
       const target = e.target;
+      const arr: Data[] = [];
+
       if (target instanceof Element) {
         if (target.classList.contains("flag")) {
           target.classList.toggle("flag-active");
+          // if (target.classList.contains("flag-active")) {
+          const flag: any = this.element.querySelectorAll(".flag-active");
+
+          for (let i = 0; i < flag.length; i++) {
+            for (let j = 0; j < data.length; j++) {
+              if (flag[i].dataset.flag === data[j].num) {
+                arr.push(data[j]);
+                // }
+              }
+            }
+          }
         }
+
+        this.container = [...arr];
+        if (this.container.length > 20) {
+          this.container = this.container.slice(0, 20);
+          target.classList.toggle("flag-active");
+          //       const div = document.createElement("div");
+          //       div.classList.add("modal");
+          //       div.innerHTML = `
+          //    <h2>Бабушка сказала больше 20 не брать</h2>
+
+          // `;
+
+          //       this.parentModal = this.element.querySelector(
+          //         ".filter-range-wrapper"
+          //       );
+          //       if (this.parentModal) {
+          //         this.parentModal?.appendChild(div);
+          //       }
+        }
+
+        count.innerHTML = this.container.length;
       }
     });
   }
@@ -441,6 +486,7 @@ class ToysCard {
         });
       }
     }
+
     this.removeToys();
     this.render();
   }
@@ -467,7 +513,6 @@ class ToysCard {
     this.filterSort();
     this.btnReset();
     this.filterFlag();
-    // this.filterSliderCount();
   }
 }
 

@@ -30,7 +30,7 @@ class Header {
            </div>
            <div class="number-toys-wrapper">
             <span class="number-toys-top"></span>
-            <div class="number-toys">20</div>
+            <div class="number-toys">0</div>
            </div>
          </div>
        </div>
