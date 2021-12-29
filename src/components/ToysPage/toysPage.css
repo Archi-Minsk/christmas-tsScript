@@ -92,21 +92,21 @@
   height: 27px;
   background-image: url(../../assets/svg/ball.svg);
 }
-input[type="checkbox"]:checked,
-input[type="checkbox"]:not(:checked) {
+.love-toys:checked,
+.love-toys:not(:checked) {
   position: absolute;
   left: -9999px;
 }
-input[type="checkbox"]:checked + label,
-input[type="checkbox"]:not(:checked) + label {
+.love-toys:checked + label,
+.love-toys:not(:checked) + label {
   display: inline-block;
   position: relative;
   padding-left: 28px;
   line-height: 20px;
   cursor: pointer;
 }
-input[type="checkbox"]:checked + label:before,
-input[type="checkbox"]:not(:checked) + label:before {
+.love-toys:checked + label:before,
+.love-toys:not(:checked) + label:before {
   content: "";
   margin: 18px 0 0 10px;
   position: absolute;
@@ -119,8 +119,8 @@ input[type="checkbox"]:not(:checked) + label:before {
   background-color: #ffffff;
   opacity: 0.8;
 }
-input[type="checkbox"]:checked + label:after,
-input[type="checkbox"]:not(:checked) + label:after {
+.love-toys:checked + label:after,
+.love-toys:not(:checked) + label:after {
   content: "";
   position: absolute;
   -webkit-transition: all 0.2s ease;
@@ -129,8 +129,8 @@ input[type="checkbox"]:not(:checked) + label:after {
   transition: all 0.2s ease;
 }
 
-input[type="checkbox"]:checked + label:after,
-input[type="checkbox"]:not(:checked) + label:after {
+.love-toys:checked + label:after,
+.love-toys:not(:checked) + label:after {
   left: 12px;
   top: -2px;
   width: 7px;
@@ -144,11 +144,11 @@ input[type="checkbox"]:not(:checked) + label:after {
   -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
 }
-input[type="checkbox"]:not(:checked) + label:after {
+.love-toys:not(:checked) + label:after {
   opacity: 0;
 }
 
-input[type="checkbox"]:checked + label:after {
+.love-toys:checked + label:after {
   opacity: 1;
 }
 

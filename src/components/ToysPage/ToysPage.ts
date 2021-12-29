@@ -3,7 +3,7 @@ import UiSlider from "../service/uiSlider/UiSlider";
 import ToysCard from "../ToysCard/ToysCard";
 
 class ToysPage {
-  private element: Element;
+  public element: Element;
   public count: [number, number];
   public uiSlider1: UiSlider;
   public uiSlider2: UiSlider;
@@ -42,7 +42,7 @@ class ToysPage {
                         </div>
                         <div class="filter-forma-wrapper">
                           <p class="filter-value">Только любимые :</p>
-                          <input type="checkbox" class="love-toys" id="1"><label for="1"></label>
+                          <input type="checkbox" class="love-toys" id="1"><label class="label-love" for="1"></label>
                         </div>
                     </div>
                     <div class="filter-style filter-range-wrapper">
@@ -89,8 +89,26 @@ class ToysPage {
     this.renderValueYear();
     this.addToys();
     this.btnReset();
+    this.removeToysPage();
     return this.element;
   }
+
+  removeToysPage() {
+    const btn = document.querySelector(".header-btn-prev");
+    const btnTree = document.querySelector(".btn-tree");
+    btnTree?.addEventListener("click", () => {
+      const toysPages = document.querySelector(".btn-toys");
+      toysPages?.classList.remove("active-btn");
+      this.element?.remove();
+    });
+
+    btn?.addEventListener("click", () => {
+      const toysPages = document.querySelector(".btn-toys");
+      toysPages?.classList.remove("active-btn");
+      this.element?.remove();
+    });
+  }
+
   renderValueSlider(): void {
     this.uiSlider1.slider1.noUiSlider.on("update.one", () => {
       const count = this.uiSlider1.slider1.noUiSlider.get();
@@ -162,6 +180,7 @@ class ToysPage {
   addToys(): void {
     const card = new ToysCard(this.element);
     card.render();
+    card.filterValue();
   }
 }
 

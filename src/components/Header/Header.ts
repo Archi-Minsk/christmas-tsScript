@@ -1,8 +1,10 @@
 import "./header.css";
 import StartPage from "../StartPage/StartPage";
+import ToysPage from "../ToysPage/ToysPage";
+import TreePage from "../Tree/TreePage/TreePage";
 
 class Header {
-  private element: Element;
+  public element: Element;
   private rootEl: Element | null;
   private btnPrev: Element | null;
   private btnToys: Element | null;
@@ -36,16 +38,44 @@ class Header {
        </div>
       `;
     this.clickPrev();
+    this.clickToys();
+    this.clickTree();
     return this.element;
   }
   clickPrev(): void {
-    this.btnPrev = this.element.querySelector(".footer-btn-prev");
+    this.btnPrev = this.element.querySelector(".header-btn-prev");
     const startPage = new StartPage();
+
     if (this.btnPrev) {
       this.btnPrev.addEventListener("click", () => {
         this.element.remove();
+
         if (this.rootEl) {
           this.rootEl.appendChild(startPage.render());
+        }
+      });
+    }
+  }
+  clickToys() {
+    this.btnToys = this.element.querySelector(".btn-toys");
+
+    this.rootEl = document.querySelector("#root");
+    const toysPage = new ToysPage();
+    this.btnToys?.addEventListener("click", () => {
+      if (this.rootEl) {
+        const toysPages = this.element.querySelector(".btn-toys");
+        toysPages?.classList.add("active-btn");
+        this.rootEl.appendChild(toysPage.render());
+      }
+    });
+  }
+  clickTree() {
+    this.btnToys = this.element.querySelector(".btn-tree");
+    const treePage = new TreePage();
+    if (this.btnToys) {
+      this.btnToys?.addEventListener("click", () => {
+        if (this.rootEl) {
+          this.rootEl.appendChild(treePage.render());
         }
       });
     }

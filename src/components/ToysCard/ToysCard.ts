@@ -23,6 +23,7 @@ class ToysCard {
   private valueRightYear: Element | null;
   public container: Data[];
   private countToys: Element;
+  private arr: Data[];
 
   constructor(element: Element) {
     this.card;
@@ -45,8 +46,7 @@ class ToysCard {
     this.valueRightYear = this.element.querySelector(".year-right");
     this.container = [];
     this.countToys;
-
-    this.filterValue();
+    this.arr = [];
   }
 
   structureCard(bd: Array<Data>): void {
@@ -357,7 +357,6 @@ class ToysCard {
         this.arrForm = [];
         this.arrFavorite = [];
         this.filterData = [];
-        // this.loveToys?.checked = false;
         this.search.value = "";
         const block = this.element.querySelectorAll("span");
         block.forEach((i) => {
@@ -377,49 +376,58 @@ class ToysCard {
       ".security-container-toys"
     );
 
-    const count: any = document.querySelector(".number-toys");
+    const count = document.querySelector(".number-toys");
 
     containerCard?.addEventListener("click", (e) => {
-      count.innerHTML = "0";
+      if (count) {
+        count.innerHTML = "0";
+      }
+
       const target = e.target;
-      const arr: Data[] = [];
+      // const arr: Data[] = [];
+      this.arr = [];
 
       if (target instanceof Element) {
         if (target.classList.contains("flag")) {
           target.classList.toggle("flag-active");
-          // if (target.classList.contains("flag-active")) {
+
           const flag: any = this.element.querySelectorAll(".flag-active");
 
           for (let i = 0; i < flag.length; i++) {
             for (let j = 0; j < data.length; j++) {
               if (flag[i].dataset.flag === data[j].num) {
-                arr.push(data[j]);
-                // }
+                this.arr.push(data[j]);
               }
             }
           }
         }
+        console.log(this.arr);
+        this.container = [...this.arr];
 
-        this.container = [...arr];
         if (this.container.length > 20) {
           this.container = this.container.slice(0, 20);
           target.classList.toggle("flag-active");
-          //       const div = document.createElement("div");
-          //       div.classList.add("modal");
-          //       div.innerHTML = `
-          //    <h2>Бабушка сказала больше 20 не брать</h2>
+          const div = document.createElement("div");
+          div.classList.add("modal");
+          div.innerHTML = `
+             <h2>Бабушка сказала больше 20 не брать</h2>
 
-          // `;
+          `;
 
-          //       this.parentModal = this.element.querySelector(
-          //         ".filter-range-wrapper"
-          //       );
-          //       if (this.parentModal) {
-          //         this.parentModal?.appendChild(div);
-          //       }
+          this.parentModal = this.element.querySelector(
+            ".filter-range-wrapper"
+          );
+          if (this.parentModal) {
+            this.parentModal?.appendChild(div);
+          }
+          setTimeout(() => {
+            div.remove();
+          }, 3000);
         }
-
-        count.innerHTML = this.container.length;
+        localStorage.setItem("toys", JSON.stringify(this.container));
+        if (count) {
+          count.innerHTML = this.container.length + "";
+        }
       }
     });
   }

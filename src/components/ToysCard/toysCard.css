@@ -46,6 +46,7 @@
   border-width: 40px 20px 10px;
   border-style: solid;
   border-color: #278d9f #278d9f transparent;
+  cursor: pointer;
   transition: all 0.3;
 }
 .flag-active {
@@ -54,4 +55,19 @@
 .active {
   opacity: 1;
   border: 1px solid goldenrod;
+}
+.modal {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  width: 500px;
+  height: 200px;
+  text-align: center;
+  border: 1px solid #278d9f;
+  border-radius: 30px;
+  background: rgb(63, 141, 159);
+  opacity: 1;
+  z-index: 99;
 }

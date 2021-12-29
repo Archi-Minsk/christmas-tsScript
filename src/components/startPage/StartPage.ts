@@ -1,6 +1,6 @@
 import "./startPage.css";
 import Header from "../Header/Header";
-import ToysPage from "../ToysPage/ToysPage";
+import TreePage from "../../components/Tree/TreePage/TreePage";
 
 class StartPage {
   private element: Element;
@@ -35,13 +35,13 @@ class StartPage {
     this.btn = this.element.querySelector(".title-btn-start");
     const rootEl = document.querySelector("#root");
     const header = new Header();
-    const toysPage = new ToysPage();
+    const treePage = new TreePage();
     if (this.btn) {
       this.btn.addEventListener("click", () => {
         if (rootEl) {
           this.element.remove();
           rootEl.appendChild(header.render());
-          rootEl.appendChild(toysPage.render());
+          rootEl.appendChild(treePage.render());
         }
       });
     }
