@@ -205,11 +205,6 @@ class TreePage {
       drag.forEach((el) => {
         el.addEventListener("dragstart", (e: DragEvent) => {
           e.dataTransfer?.setData("text/html", "dragstart");
-          // if (e.dataTransfer) {
-          //   e.dataTransfer.effectAllowed = "copy";
-
-          //   console.log(e.dataTransfer);
-          // }
 
           startX = e.pageX;
           startY = e.pageY;
